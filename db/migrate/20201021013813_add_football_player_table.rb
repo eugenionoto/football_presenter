@@ -1,0 +1,23 @@
+class AddFootballPlayerTable < ActiveRecord::Migration[6.0]
+  def change
+  	create_table :football_players do |t|
+      t.string :name
+      t.string :team
+      t.string :position
+      t.integer :rushing_attempts
+      t.float   :rushing_attempts_per_game
+      t.integer :yards
+      t.float   :yards_per_game
+      t.float   :average_yards
+      t.integer :total_rushing_touchdown
+      t.string  :longest_rush
+      t.integer :rushing_first_down
+      t.float   :rushing_first_down_percent
+      t.integer :rushing_20
+      t.integer :rushing_40
+      t.integer :rushing_fumble
+ 
+      t.timestamps
+    end
+  end
+end

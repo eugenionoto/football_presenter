@@ -10,5 +10,5 @@ require 'json'
 records = JSON.parse(File.read('nfl-rushing-master/rushing.json'))
 
 records.each do |record|
-	FootballPlayer.create_from_json(record)
+	puts record.to_s
 end

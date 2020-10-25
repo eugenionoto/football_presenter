@@ -16,7 +16,7 @@
     %tr
       - @display_attributes.each do |attr|
         - if FootballPlayer.sortable?(attr)
-          %th= sortable(attr, t(".#{attr}"), "white", @search_params)
+          %th= sortable(attr, t(".#{attr}"), @search_params)
         - else
           %th= t(".#{attr}")
   %tbody

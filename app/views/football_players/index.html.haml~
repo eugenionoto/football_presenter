@@ -12,7 +12,7 @@
               = hidden_field_tag 'direction', params["direction"]
               = submit_tag t(".search")
           .right
-            = link_to t(".export"), football_players_path(sort: params["sort"], direction: params["direction"], filter: params["filter"]), class: "button"
+            = link_to t(".export"), football_players_path(sort: params["sort"], direction: params["direction"], filter: params["filter"], format: "csv"), class: "button"
     %tr
       - @display_attributes.each do |attr|
         - if FootballPlayer.sortable?(attr)

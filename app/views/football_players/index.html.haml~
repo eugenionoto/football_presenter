@@ -1,0 +1,31 @@
+%h2= t(".player_list")
+
+%table
+  %thread
+    %tr
+      %td{:colspan => @display_attributes.size}
+        .action
+          .left
+            = form_tag(football_players_path, method: :get) do
+              = text_field_tag 'filter', params[:filter], placeholder: FootballPlayer::SEARCHABLE_PARAMS.join(", ")
+              = hidden_field_tag 'sort', params["sort"]
+              = hidden_field_tag 'direction', params["direction"]
+              = submit_tag t(".search")
+          .right
+            = link_to t(".export"), football_players_path(sort: params["sort"], direction: params["direction"], filter: params["filter"]), class: "button"
+    %tr
+      - @display_attributes.each do |attr|
+        - if FootballPlayer.sortable?(attr)
+          %th= sortable(attr, t(".#{attr}"), "white", @search_params)
+        - else
+          %th= t(".#{attr}")
+  %tbody
+    - @football_players.each do |player|
+      %tr
+        - @display_attributes.each do |attr|
+          %td= player.send(attr.to_sym)
+  %tfoot
+    %tr
+      %td{:colspan => @display_attributes.size}
+        .apple_pagination     
+          = will_paginate @football_players

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_10_21_013813) do
 
-  create_table "football_players", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "football_players", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "team"
     t.string "position"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_10_21_013813) do
     t.float "average_yards"
     t.integer "total_rushing_touchdown"
     t.string "longest_rush"
+    t.string "longest_rush_sortable_field"
     t.integer "rushing_first_down"
     t.float "rushing_first_down_percent"
     t.integer "rushing_20"
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_10_21_013813) do
     t.integer "rushing_fumble"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_football_players_on_name", unique: true
   end
 
 end

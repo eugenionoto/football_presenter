@@ -8,9 +8,10 @@ class AddFootballPlayerTable < ActiveRecord::Migration[6.0]
       t.float   :rushing_attempts_per_game
       t.integer :yards
       t.float   :yards_per_game
-      t.flost   :average_yards
+      t.float   :average_yards
       t.integer :total_rushing_touchdown
       t.string  :longest_rush
+      t.string  :longest_rush_sortable_field
       t.integer :rushing_first_down
       t.float   :rushing_first_down_percent
       t.integer :rushing_20
@@ -19,5 +20,6 @@ class AddFootballPlayerTable < ActiveRecord::Migration[6.0]
  
       t.timestamps
     end
+    add_index :football_players, :name
   end
 end

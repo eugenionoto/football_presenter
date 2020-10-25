@@ -7,15 +7,20 @@ class FootballPlayerSearch < DbSearch
 	private
 	
 	def sort
-		direction = @options[:direction] || :desc
-		if @options[:sort].present? && validate_attribute(@options[:sort])
-			@results = @results.order(@options[:sort] => direction)
+		direction = @options["direction"] || :desc
+		if @options["sort"].present? && validate_attribute(@options["sort"])
+			@results = @results.order(use_for_sort(@options["sort"]) => direction)
 		end
 	end
 	
 	def filter
-		if @options[:filter].present?
-			@results = @results.where("name LIKE ?", "%#{@options[:filter]}%")
+		if @options["filter"].present?
+			filters = []
+			search_class::SEARCHABLE_PARAMS.each do |field|
+				filters << "#{field} LIKE :search_param"
+			end
+			query = filters.join(" OR ")
+			@results = @results.where(query, {search_param: "%#{@options["filter"]}%"})
 		end
 	end
 	

@@ -24,21 +24,6 @@ th{
   color: #fff;
 }
 
-.pretty th .current {
-  padding-right: 12px;
-  background-repeat: no-repeat;
-  background-position: right center;
-  color: blue;
-}
-
-.pretty th .asc {
-  background-image: url(/images/up_arrow.gif);
-}
-
-.pretty th .desc {
-  background-image: url(/images/down_arrow.gif);
-}
-
 .action{
   display: flex;
   justify-content: space-between;

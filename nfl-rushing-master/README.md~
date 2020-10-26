@@ -54,4 +54,21 @@ We will evaluate you on your ability to solve the problem defined in the require
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Installation and running this solution
-... TODO
+ requerements:
+	ruby 2.5.7
+	mysql database
+	
+ steps
+   bundle install
+   db:create db:migrate db:seed
+   rails s
+   
+   the app will then run on 127.0.0.1:3000
+   
+### About the solution
+  1.1 Create a webpage which displays a table with the contents of [`rushing.json`]
+  Since we are supposed to deal with a larger set of data I decided to add the data in a database and run appropriate queries. I strongly believe that even when getting the data from an API, a file or a db we should not request more data than necessary and then filter or sort but request the appropriate data.
+  To avoid getting too much data I with went with db_search.rb (parent) and footbal_player_search.rb . The first is to avoid code duplication when future expansions come into play such as basball players ans the secon will be specific to the football player model. Those wil create a paginated query so we cannot blow the memory and we can render fast even if the original set would include too much data. Another choice that I made was to fill in the ATTRIBUTES_TO_DISPLAY constant all the attributes that we want to show. other attributes can be added to the model and should be in PRIVATE_ATTRS
+  
+  1.2 The user should be able to sort the players by _Total Rushing Yards_, _Longest Rush_ and _Total Rushing Touchdowns_
+  Also in that case we will use the help of footbal_player_search.rb. In the football_player.rb model we have the following constant: SORTABLE_PARAMS.any attribute in that array will be automatically picked by the view and decorated with some class and transformed into a link. On clicking on that link we will sort the data based on the attribute name. For instance if you add teams to that list and reload the page, we will be able to sort by teams without touching anything else. Tor the _Total Rushing Touchdowns_ the sorting is a bit delicate because of the potencial presence of the "T". That column is then a string and 9 will be considered greater that 81. To solve that I added a longest_rush_sortable_field which I preprocess before adding the record in the database and it will contain the information that I can use to sort. I added that column to the PRIVATE_ATTRS. Now my code will automatically use a sortable_field in place of the field itself for order when such a field is present. so if we added a name_sortable_fild column in the model and database containnig "lasname firstname" and add the name field to the SORTABLE_PARAMS, we could display the player names as they are now, but sort them by last name.
